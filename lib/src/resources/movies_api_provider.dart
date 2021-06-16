@@ -2,19 +2,19 @@ import 'dart:async';
 import 'package:http/http.dart' as http;
 import '../../utils/constants.dart';
 import 'dart:convert';
-import '../models/item_model.dart';
+import '../models/movie_model.dart';
 
 class MoviesApiProvider {
   http.Client client = http.Client();
 
-  Future<ItemModel> fetchMoviesList() async {
+  Future<MovieModel> fetchMoviesList() async {
     final _response = await client.get(
       Uri.parse(
         Constants.uriClient,
       ),
     );
     if (_response.statusCode == Constants.status) {
-      return ItemModel.fromJson(json.decode(
+      return MovieModel.fromJson(json.decode(
         _response.body,
       ));
     } else {
