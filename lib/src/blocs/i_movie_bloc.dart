@@ -1,7 +1,7 @@
-import '../models/movie_model.dart';
+import '../models/movie.dart';
 import 'bloc.dart';
 
-abstract class IMoviesBloc extends Bloc {
+abstract class IMovieBloc extends Bloc {
   Stream<MovieModel> get moviesStream;
 
   void fetchAllMovies();

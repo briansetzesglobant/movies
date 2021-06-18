@@ -1,4 +1,4 @@
-import 'package:movies/utils/constants.dart';
+import '../resources/movie_strings.dart';
 
 class MovieResult {
   int _vote_count;
@@ -24,8 +24,8 @@ class MovieResult {
     _title = result['title'];
     _popularity = result['popularity'];
     _poster_path = result['poster_path'] != null
-        ? Constants.imageNetwork + result['poster_path']
-        : "https://kubalubra.is/wp-content/uploads/2017/11/default-thumbnail.jpg";
+        ? MovieStrings.imageNetwork + result['poster_path']
+        : MovieStrings.imageDefault;
     _original_language = result['original_language'];
     _original_title = result['original_title'];
     for (int i = 0; i < result['genre_ids'].length; i++) {

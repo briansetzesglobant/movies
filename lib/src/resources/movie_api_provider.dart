@@ -1,16 +1,17 @@
 import 'dart:async';
 import 'package:http/http.dart' as http;
-import '../../utils/constants.dart';
 import 'dart:convert';
-import '../models/movie_model.dart';
+import '../models/movie.dart';
+import '../../utils/constants.dart';
+import 'movie_strings.dart';
 
-class MoviesApiProvider {
+class MovieApiProvider {
   http.Client client = http.Client();
 
   Future<MovieModel> fetchAllMovies() async {
     final _response = await client.get(
       Uri.parse(
-        Constants.uriClient,
+        MovieStrings.uriClient,
       ),
     );
     return resp(_response);
@@ -19,7 +20,7 @@ class MoviesApiProvider {
   Future<MovieModel> searchByMovieName(String nameMovie) async {
     final _response = await client.get(
       Uri.parse(
-        Constants.uriSearchClient + nameMovie,
+        MovieStrings.uriSearchClient + nameMovie,
       ),
     );
     return resp(_response);
@@ -32,7 +33,7 @@ class MoviesApiProvider {
       ));
     } else {
       throw Exception(
-        Constants.error + _response.statusCode.toString(),
+        MovieStrings.error + _response.statusCode.toString(),
       );
     }
   }

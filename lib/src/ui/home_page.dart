@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import '../../utils/constants.dart';
 import '../../utils/text_styles.dart';
-import '../blocs/i_movies_bloc.dart';
-import '../models/movie_model.dart';
+import '../blocs/i_movie_bloc.dart';
+import '../models/movie.dart';
 
 class HomePage extends StatefulWidget {
   final String title;
 
-  final IMoviesBloc bloc;
+  final IMovieBloc bloc;
 
   HomePage({
     Key key,
@@ -82,8 +82,8 @@ class HomePageState extends State<HomePage> {
                       widget.bloc.searchByMovieName(nameMovie);
                     },
                   ),
-                  width: Constants.widthSearch,
-                  height: Constants.heightSearch,
+                  width: Constants.searchSizedBoxWidth,
+                  height: Constants.searchSizedBoxHeight,
                 ),
               )
             ],

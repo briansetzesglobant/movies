@@ -1,14 +1,14 @@
 import 'dart:async';
-import '../models/movie_model.dart';
-import '../resources/movies_repository.dart';
-import 'i_movies_bloc.dart';
+import '../models/movie.dart';
+import '../resources/movie_repository.dart';
+import 'i_movie_bloc.dart';
 
-class MoviesBloc extends IMoviesBloc {
-  MoviesRepository _moviesRepository = MoviesRepository();
+class MovieBloc extends IMovieBloc {
+  MovieRepository _moviesRepository = MovieRepository();
   StreamController<MovieModel> _moviesStreamController = StreamController();
 
   @override
-  void initialize() {}
+  Future<void> initialize() {}
 
   @override
   void dispose() {
