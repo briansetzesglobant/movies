@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../utils/constants.dart';
+import '../../utils/text_styles.dart';
 import '../blocs/i_movies_bloc.dart';
 import '../models/movie_model.dart';
 
@@ -36,9 +37,57 @@ class HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          widget.title,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(
+          Constants.preferredSizeFromHeight,
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: EdgeInsets.all(
+                  Constants.childrenPadding,
+                ),
+                child: Text(
+                  widget.title,
+                  textAlign: TextAlign.center,
+                  style: TextStyles.styleTitle,
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(
+                  Constants.childrenPadding,
+                ),
+                child: SizedBox(
+                  child: TextField(
+                    style: TextStyles.styleSearch,
+                    decoration: InputDecoration(
+                      prefixIcon: Padding(
+                        padding: EdgeInsets.only(
+                          right: Constants.paddingIcon,
+                        ),
+                        child: Icon(
+                          Icons.east,
+                          color: Colors.black,
+                        ),
+                      ),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                    onSubmitted: (nameMovie) {
+                      widget.bloc.searchByMovieName(nameMovie);
+                    },
+                  ),
+                  width: Constants.widthSearch,
+                  height: Constants.heightSearch,
+                ),
+              )
+            ],
+          ),
         ),
       ),
       body: StreamBuilder(
@@ -75,7 +124,7 @@ class HomePageState extends State<HomePage> {
               Constants.paddingNumber,
             ),
             child: Image.network(
-              Constants.imageNetwork + snapshot.data.results[index].poster_path,
+              snapshot.data.results[index].poster_path,
               fit: BoxFit.cover,
             ),
           ),

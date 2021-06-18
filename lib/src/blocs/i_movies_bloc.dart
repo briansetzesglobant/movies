@@ -5,4 +5,6 @@ abstract class IMoviesBloc extends Bloc {
   Stream<MovieModel> get moviesStream;
 
   void fetchAllMovies();
+
+  void searchByMovieName(String nameMovie);
 }

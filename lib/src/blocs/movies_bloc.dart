@@ -23,4 +23,14 @@ class MoviesBloc extends IMoviesBloc {
     final _moviesList = await _moviesRepository.fetchAllMovies();
     _moviesStreamController.sink.add(_moviesList);
   }
+
+  @override
+  void searchByMovieName(String nameMovie) async {
+    if (nameMovie.isEmpty) {
+      fetchAllMovies();
+    } else {
+      _moviesStreamController.sink
+          .add(await _moviesRepository.searchByMovieName(nameMovie));
+    }
+  }
 }

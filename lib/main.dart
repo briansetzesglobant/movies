@@ -13,9 +13,9 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: HomePage(
-          title: "Movies App",
-          bloc: _moviesBloc,
-        ),
-     );
+        title: "Movies App",
+        bloc: _moviesBloc,
+      ),
+    );
   }
 }
