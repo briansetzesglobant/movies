@@ -8,27 +8,27 @@ import 'movie_strings.dart';
 class MovieApiProvider {
   http.Client client = http.Client();
 
-  Future<MovieModel> fetchAllMovies() async {
+  Future<Movie> fetchAllMovies() async {
     final _response = await client.get(
       Uri.parse(
         MovieStrings.uriClient,
       ),
     );
-    return resp(_response);
+    return response(_response);
   }
 
-  Future<MovieModel> searchByMovieName(String nameMovie) async {
+  Future<Movie> searchByMovieName(String nameMovie) async {
     final _response = await client.get(
       Uri.parse(
         MovieStrings.uriSearchClient + nameMovie,
       ),
     );
-    return resp(_response);
+    return response(_response);
   }
 
-  MovieModel resp(http.Response _response) {
+  Movie response(http.Response _response) {
     if (_response.statusCode == Constants.status) {
-      return MovieModel.fromJson(json.decode(
+      return Movie.fromJson(json.decode(
         _response.body,
       ));
     } else {

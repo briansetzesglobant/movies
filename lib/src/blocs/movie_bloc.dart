@@ -5,7 +5,7 @@ import 'i_movie_bloc.dart';
 
 class MovieBloc extends IMovieBloc {
   MovieRepository _moviesRepository = MovieRepository();
-  StreamController<MovieModel> _moviesStreamController = StreamController();
+  StreamController<Movie> _moviesStreamController = StreamController();
 
   @override
   Future<void> initialize() {}
@@ -16,7 +16,7 @@ class MovieBloc extends IMovieBloc {
   }
 
   @override
-  Stream<MovieModel> get moviesStream => _moviesStreamController.stream;
+  Stream<Movie> get moviesStream => _moviesStreamController.stream;
 
   @override
   void fetchAllMovies() async {

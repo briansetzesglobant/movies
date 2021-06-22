@@ -94,7 +94,7 @@ class HomePageState extends State<HomePage> {
         stream: widget.bloc.moviesStream,
         builder: (
           context,
-          AsyncSnapshot<MovieModel> snapshot,
+          AsyncSnapshot<Movie> snapshot,
         ) {
           return snapshot.hasData
               ? buildList(
@@ -108,7 +108,7 @@ class HomePageState extends State<HomePage> {
     );
   }
 
-  Widget buildList(AsyncSnapshot<MovieModel> snapshot) {
+  Widget buildList(AsyncSnapshot<Movie> snapshot) {
     return GridView.builder(
       itemCount: snapshot.data.results.length,
       gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
