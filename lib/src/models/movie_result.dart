@@ -1,3 +1,5 @@
+import '../resources/movie_strings.dart';
+
 class MovieResult {
   int _vote_count;
   int _id;
@@ -14,14 +16,16 @@ class MovieResult {
   String _overview;
   String _release_date;
 
-  MovieResult(result) {
+  MovieResult(Map<String, dynamic> result) {
     _vote_count = result['vote_count'];
     _id = result['id'];
     _video = result['video'];
     _vote_average = result['vote_average'];
     _title = result['title'];
     _popularity = result['popularity'];
-    _poster_path = result['poster_path'];
+    _poster_path = result['poster_path'] != null
+        ? MovieStrings.imageNetwork + result['poster_path']
+        : MovieStrings.imageDefault;
     _original_language = result['original_language'];
     _original_title = result['original_title'];
     for (int i = 0; i < result['genre_ids'].length; i++) {

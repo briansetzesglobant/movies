@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import '../../utils/constants.dart';
-import '../blocs/i_movies_bloc.dart';
-import '../models/movie_model.dart';
+import '../../utils/text_styles.dart';
+import '../blocs/i_movie_bloc.dart';
+import '../models/movie.dart';
 
 class HomePage extends StatefulWidget {
   final String title;
 
-  final IMoviesBloc bloc;
+  final IMovieBloc bloc;
 
   HomePage({
     Key key,
@@ -36,16 +37,64 @@ class HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          widget.title,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(
+          Constants.preferredSizeFromHeight,
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: EdgeInsets.all(
+                  Constants.childrenPadding,
+                ),
+                child: Text(
+                  widget.title,
+                  textAlign: TextAlign.center,
+                  style: TextStyles.styleTitle,
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(
+                  Constants.childrenPadding,
+                ),
+                child: SizedBox(
+                  child: TextField(
+                    style: TextStyles.styleSearch,
+                    decoration: InputDecoration(
+                      prefixIcon: Padding(
+                        padding: EdgeInsets.only(
+                          right: Constants.paddingIcon,
+                        ),
+                        child: Icon(
+                          Icons.east,
+                          color: Colors.black,
+                        ),
+                      ),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                    onSubmitted: (nameMovie) {
+                      widget.bloc.searchByMovieName(nameMovie);
+                    },
+                  ),
+                  width: Constants.searchSizedBoxWidth,
+                  height: Constants.searchSizedBoxHeight,
+                ),
+              )
+            ],
+          ),
         ),
       ),
       body: StreamBuilder(
         stream: widget.bloc.moviesStream,
         builder: (
           context,
-          AsyncSnapshot<MovieModel> snapshot,
+          AsyncSnapshot<Movie> snapshot,
         ) {
           return snapshot.hasData
               ? buildList(
@@ -59,7 +108,7 @@ class HomePageState extends State<HomePage> {
     );
   }
 
-  Widget buildList(AsyncSnapshot<MovieModel> snapshot) {
+  Widget buildList(AsyncSnapshot<Movie> snapshot) {
     return GridView.builder(
       itemCount: snapshot.data.results.length,
       gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
@@ -75,7 +124,7 @@ class HomePageState extends State<HomePage> {
               Constants.paddingNumber,
             ),
             child: Image.network(
-              Constants.imageNetwork + snapshot.data.results[index].poster_path,
+              snapshot.data.results[index].poster_path,
               fit: BoxFit.cover,
             ),
           ),
