@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../resources/movie_strings.dart';
 import '../widgets/movie_detail_image.dart';
 import '../../utils/constants.dart';
 import '../../utils/text_styles.dart';
@@ -131,7 +132,7 @@ class HomePageState extends State<HomePage> {
                   movieReleaseDate:
                       movieData.results[index].releaseDate!.isNotEmpty
                           ? movieData.results[index].releaseDate!
-                          : "Without date",
+                          : MovieStrings.movieDefaultDate,
                   movieOverview: movieData.results[index].overview,
                   moviePosterPath: movieData.results[index].posterPath,
                   movieTitle: movieData.results[index].title,
@@ -142,7 +143,6 @@ class HomePageState extends State<HomePage> {
           },
           child: MovieDetailImage(
             posterPath: movieData.results[index].posterPath,
-            imageBoxFit: BoxFit.cover,
           ),
         );
       },

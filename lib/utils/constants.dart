@@ -31,4 +31,6 @@ abstract class Constants {
   static const double paddingTitleTop = 100.0;
   static const double paddingTitleBottom = 20.0;
   static const double textStyleTitleFontSize = 30.0;
+
+  static const double voteAverage = 0.0;
 }

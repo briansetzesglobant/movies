@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../resources/movie_strings.dart';
 import '../../utils/constants.dart';
 import '../../utils/text_styles.dart';
 
@@ -20,11 +21,11 @@ class MovieDetailInformation extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            "Date: $date",
+            MovieStrings.movieDetailDateText + date,
             style: TextStyles.styleInformation,
           ),
           Text(
-            "Rating: $rating",
+            MovieStrings.movieDetailRatingText + rating,
             style: TextStyles.styleInformation,
           ),
         ],

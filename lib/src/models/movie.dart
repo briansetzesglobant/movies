@@ -13,12 +13,10 @@ class Movie {
     required this.totalPages,
   });
 
-  factory Movie.fromJson(
-    Map<String, dynamic> parsedJson,
-  ) {
+  factory Movie.fromJson(Map<String, dynamic> parsedJson) {
     var parsedJsonList = parsedJson['results'] as List;
 
-    List<MovieResult> movieTemporary = parsedJsonList
+    List<MovieResult> movieResultList = parsedJsonList
         .map((eachMovie) => MovieResult.fromJson(eachMovie))
         .toList();
 
@@ -26,7 +24,7 @@ class Movie {
       page: parsedJson['page'],
       totalResults: parsedJson['total_results'],
       totalPages: parsedJson['total_pages'],
-      results: movieTemporary,
+      results: movieResultList,
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../resources/movie_strings.dart';
 import '../../utils/text_styles.dart';
 import '../../utils/constants.dart';
 
@@ -27,7 +28,9 @@ class MovieDetailButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.all(Constants.paddingButtonChildren),
+              padding: const EdgeInsets.all(
+                Constants.paddingButtonChildren,
+              ),
               child: Icon(
                 Icons.arrow_back_sharp,
                 size: Constants.paddingButtonIconSize,
@@ -35,7 +38,7 @@ class MovieDetailButton extends StatelessWidget {
               ),
             ),
             Text(
-              "BACK",
+              MovieStrings.movieDetailBackText,
               style: TextStyles.styleButton,
             ),
           ],

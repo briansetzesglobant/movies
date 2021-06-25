@@ -1,3 +1,4 @@
+import '../../utils/constants.dart';
 import '../resources/movie_strings.dart';
 
 class MovieResult {
@@ -20,8 +21,8 @@ class MovieResult {
     this.voteCount,
     this.id,
     this.video,
-    this.voteAverage = 0.0,
-    this.title = "",
+    this.voteAverage = Constants.voteAverage,
+    this.title = MovieStrings.emptyString,
     this.popularity,
     required this.posterPath,
     this.originalLanguage,
@@ -29,15 +30,15 @@ class MovieResult {
     this.genreIds,
     this.backdropPath,
     this.adult,
-    this.overview = "",
+    this.overview = MovieStrings.emptyString,
     this.releaseDate,
   });
 
   factory MovieResult.fromJson(Map<String, dynamic> parsedJson) {
-    var parsedJsonList = parsedJson['genre_ids'] as List;
+    var genresJsonList = parsedJson['genre_ids'] as List;
     List<int> genreList = [];
-    for (int i = 0; i < parsedJsonList.length; i++) {
-      genreList.add(parsedJsonList[i]);
+    for (int i = 0; i < genresJsonList.length; i++) {
+      genreList.add(genresJsonList[i]);
     }
 
     return MovieResult(
@@ -60,7 +61,7 @@ class MovieResult {
       overview: parsedJson['overview'],
       releaseDate: parsedJson['release_date'] != null
           ? parsedJson['release_date']
-          : "Without date",
+          : MovieStrings.movieDefaultDate,
     );
   }
 }

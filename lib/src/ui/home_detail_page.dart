@@ -26,7 +26,9 @@ class HomeDetailPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.blueGrey,
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(Constants.paddingHomeDetails),
+        padding: const EdgeInsets.all(
+          Constants.paddingHomeDetails,
+        ),
         child: MovieDetailButton(),
       ),
       body: Center(
