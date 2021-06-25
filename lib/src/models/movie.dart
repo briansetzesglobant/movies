@@ -1,28 +1,32 @@
 import 'movie_result.dart';
 
 class Movie {
-  int _page;
-  int _total_results;
-  int _total_pages;
-  List<MovieResult> _results = [];
+  late int page;
+  late int totalResults;
+  late int totalPages;
+  late List<MovieResult> results;
 
-  Movie.fromJson(Map<String, dynamic> json) {
-    _page = json['page'];
-    _total_results = json['total_results'];
-    _total_pages = json['total_pages'];
-    List<MovieResult> temp = [];
-    for (int i = 0; i < json['results'].length; i++) {
-      MovieResult result = MovieResult(json['results'][i]);
-      temp.add(result);
-    }
-    _results = temp;
+  Movie({
+    required this.page,
+    required this.results,
+    required this.totalResults,
+    required this.totalPages,
+  });
+
+  factory Movie.fromJson(
+    Map<String, dynamic> parsedJson,
+  ) {
+    var parsedJsonList = parsedJson['results'] as List;
+
+    List<MovieResult> movieTemporary = parsedJsonList
+        .map((eachMovie) => MovieResult.fromJson(eachMovie))
+        .toList();
+
+    return Movie(
+      page: parsedJson['page'],
+      totalResults: parsedJson['total_results'],
+      totalPages: parsedJson['total_pages'],
+      results: movieTemporary,
+    );
   }
-
-  List<MovieResult> get results => _results;
-
-  int get total_pages => _total_pages;
-
-  int get total_results => _total_results;
-
-  int get page => _page;
 }

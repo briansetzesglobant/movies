@@ -1,67 +1,66 @@
 import '../resources/movie_strings.dart';
 
 class MovieResult {
-  int _vote_count;
-  int _id;
-  bool _video;
-  var _vote_average;
-  String _title;
-  double _popularity;
-  String _poster_path;
-  String _original_language;
-  String _original_title;
-  List<int> _genre_ids = [];
-  String _backdrop_path;
-  bool _adult;
-  String _overview;
-  String _release_date;
+  int? voteCount;
+  int? id;
+  bool? video;
+  var voteAverage;
+  String title;
+  var popularity;
+  late String posterPath;
+  String? originalLanguage;
+  String? originalTitle;
+  List<int>? genreIds;
+  String? backdropPath;
+  bool? adult;
+  String overview;
+  String? releaseDate;
 
-  MovieResult(Map<String, dynamic> result) {
-    _vote_count = result['vote_count'];
-    _id = result['id'];
-    _video = result['video'];
-    _vote_average = result['vote_average'];
-    _title = result['title'];
-    _popularity = result['popularity'];
-    _poster_path = result['poster_path'] != null
-        ? MovieStrings.imageNetwork + result['poster_path']
-        : MovieStrings.imageDefault;
-    _original_language = result['original_language'];
-    _original_title = result['original_title'];
-    for (int i = 0; i < result['genre_ids'].length; i++) {
-      _genre_ids.add(result['genre_ids'][i]);
+  MovieResult({
+    this.voteCount,
+    this.id,
+    this.video,
+    this.voteAverage = 0.0,
+    this.title = "",
+    this.popularity,
+    required this.posterPath,
+    this.originalLanguage,
+    this.originalTitle,
+    this.genreIds,
+    this.backdropPath,
+    this.adult,
+    this.overview = "",
+    this.releaseDate,
+  });
+
+  factory MovieResult.fromJson(Map<String, dynamic> parsedJson) {
+    var parsedJsonList = parsedJson['genre_ids'] as List;
+    List<int> genreList = [];
+    for (int i = 0; i < parsedJsonList.length; i++) {
+      genreList.add(parsedJsonList[i]);
     }
-    _backdrop_path = result['backdrop_path'];
-    _adult = result['adult'];
-    _overview = result['overview'];
-    _release_date = result['release_date'];
+
+    return MovieResult(
+      voteCount: parsedJson['vote_count'],
+      id: parsedJson['id'],
+      video: parsedJson['video'],
+      voteAverage: double.tryParse(parsedJson['vote_average'].toString()),
+      title: parsedJson['title'],
+      popularity: double.tryParse(parsedJson['popularity'].toString()),
+      posterPath: parsedJson['poster_path'] != null
+          ? MovieStrings.imageNetwork + parsedJson['poster_path']
+          : MovieStrings.imageDefault,
+      originalLanguage: parsedJson['original_language'],
+      originalTitle: parsedJson['original_title'],
+      genreIds: genreList,
+      backdropPath: parsedJson['backdrop_path'] != null
+          ? MovieStrings.imageNetwork + parsedJson['backdrop_path']
+          : MovieStrings.imageDefault,
+      adult: parsedJson['adult'],
+      overview: parsedJson['overview'],
+      releaseDate: parsedJson['release_date'] != null
+          ? parsedJson['release_date']
+          : "Without date",
+    );
   }
-
-  String get release_date => _release_date;
-
-  String get overview => _overview;
-
-  bool get adult => _adult;
-
-  String get backdrop_path => _backdrop_path;
-
-  List<int> get genre_ids => _genre_ids;
-
-  String get original_title => _original_title;
-
-  String get original_language => _original_language;
-
-  String get poster_path => _poster_path;
-
-  double get popularity => _popularity;
-
-  String get title => _title;
-
-  double get vote_average => _vote_average;
-
-  bool get video => _video;
-
-  int get id => _id;
-
-  int get vote_count => _vote_count;
 }
