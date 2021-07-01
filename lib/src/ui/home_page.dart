@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import '../resources/movie_strings.dart';
+import '../widgets/movie_detail_image.dart';
 import '../../utils/constants.dart';
 import '../../utils/text_styles.dart';
 import '../blocs/i_movie_bloc.dart';
 import '../models/movie.dart';
+import 'home_detail_page.dart';
 
 class HomePage extends StatefulWidget {
   final String title;
@@ -10,10 +13,9 @@ class HomePage extends StatefulWidget {
   final IMovieBloc bloc;
 
   HomePage({
-    Key key,
-    this.title,
-    this.bloc,
-  }) : super(key: key);
+    required this.title,
+    required this.bloc,
+  });
 
   @override
   State<StatefulWidget> createState() {
@@ -97,8 +99,8 @@ class HomePageState extends State<HomePage> {
           AsyncSnapshot<Movie> snapshot,
         ) {
           return snapshot.hasData
-              ? buildList(
-                  snapshot,
+              ? buildGrid(
+                  snapshot.data!,
                 )
               : Center(
                   child: CircularProgressIndicator(),
@@ -108,9 +110,9 @@ class HomePageState extends State<HomePage> {
     );
   }
 
-  Widget buildList(AsyncSnapshot<Movie> snapshot) {
+  Widget buildGrid(Movie movieData) {
     return GridView.builder(
-      itemCount: snapshot.data.results.length,
+      itemCount: movieData.results.length,
       gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: Constants.crossAxisCountNumber,
       ),
@@ -118,15 +120,29 @@ class HomePageState extends State<HomePage> {
         BuildContext context,
         int index,
       ) {
-        return GridTile(
-          child: Container(
-            padding: EdgeInsets.all(
-              Constants.paddingNumber,
-            ),
-            child: Image.network(
-              snapshot.data.results[index].poster_path,
-              fit: BoxFit.cover,
-            ),
+        return InkWell(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (
+                  context,
+                ) =>
+                    HomeDetailPage(
+                  movieReleaseDate:
+                      movieData.results[index].releaseDate!.isNotEmpty
+                          ? movieData.results[index].releaseDate!
+                          : MovieStrings.movieDefaultDate,
+                  movieOverview: movieData.results[index].overview,
+                  moviePosterPath: movieData.results[index].posterPath,
+                  movieTitle: movieData.results[index].title,
+                  movieVoteAverage: movieData.results[index].voteAverage,
+                ),
+              ),
+            );
+          },
+          child: MovieDetailImage(
+            posterPath: movieData.results[index].posterPath,
           ),
         );
       },

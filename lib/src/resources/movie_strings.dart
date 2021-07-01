@@ -11,4 +11,10 @@ abstract class MovieStrings {
 
   static const String imageDefault =
       "https://kubalubra.is/wp-content/uploads/2017/11/default-thumbnail.jpg";
+
+  static const String emptyString = "";
+  static const String movieDefaultDate = "Without date";
+  static const String movieDetailBackText = "BACK";
+  static const String movieDetailDateText = "Date: ";
+  static const String movieDetailRatingText = "Rating: ";
 }

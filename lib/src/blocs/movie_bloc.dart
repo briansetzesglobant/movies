@@ -8,7 +8,7 @@ class MovieBloc extends IMovieBloc {
   StreamController<Movie> _moviesStreamController = StreamController();
 
   @override
-  Future<void> initialize() {}
+  Future<void> initialize() async {}
 
   @override
   void dispose() {
