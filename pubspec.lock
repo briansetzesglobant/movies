@@ -108,7 +108,7 @@ packages:
       name: pedantic
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.11.0"
+    version: "1.11.1"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -170,5 +170,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
+  widgets:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: main
+      resolved-ref: "87e738b83529e8ef3db5ff505cb824660684e4d0"
+      url: "https://github.com/briansetzesglobant/widgets"
+    source: git
+    version: "0.0.1"
 sdks:
   dart: ">=2.12.0 <3.0.0"
+  flutter: ">=1.17.0"
