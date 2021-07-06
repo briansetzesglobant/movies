@@ -3,7 +3,7 @@ import '../../utils/constants.dart';
 import '../../utils/text_styles.dart';
 import '../blocs/i_movie_bloc.dart';
 import '../models/movie.dart';
-import 'popular_page.dart';
+import 'popular_movies_grid.dart';
 
 class HomePage extends StatefulWidget {
   final String title;
@@ -17,11 +17,11 @@ class HomePage extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return HomePageState();
+    return _HomePageState();
   }
 }
 
-class HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
@@ -97,7 +97,7 @@ class HomePageState extends State<HomePage> {
           AsyncSnapshot<Movie> snapshot,
         ) {
           return snapshot.hasData
-              ? PopularPage(
+              ? PopularMoviesGrid(
                   movieData: snapshot.data!,
                 )
               : Center(

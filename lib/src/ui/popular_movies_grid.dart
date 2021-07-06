@@ -4,10 +4,10 @@ import '../../utils/constants.dart';
 import '../resources/movie_strings.dart';
 import 'package:widgets/widgets.dart';
 
-class PopularPage extends StatelessWidget {
+class PopularMoviesGrid extends StatelessWidget {
   final Movie movieData;
 
-  const PopularPage({
+  const PopularMoviesGrid({
     Key? key,
     required this.movieData,
   }) : super(key: key);
