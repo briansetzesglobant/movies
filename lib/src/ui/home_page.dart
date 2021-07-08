@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import '../resources/movie_strings.dart';
-import '../widgets/movie_detail_image.dart';
 import '../../utils/constants.dart';
 import '../../utils/text_styles.dart';
 import '../blocs/i_movie_bloc.dart';
 import '../models/movie.dart';
-import 'home_detail_page.dart';
+import 'popular_movies_grid.dart';
 
 class HomePage extends StatefulWidget {
   final String title;
@@ -19,11 +17,11 @@ class HomePage extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return HomePageState();
+    return _HomePageState();
   }
 }
 
-class HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
@@ -99,53 +97,14 @@ class HomePageState extends State<HomePage> {
           AsyncSnapshot<Movie> snapshot,
         ) {
           return snapshot.hasData
-              ? buildGrid(
-                  snapshot.data!,
+              ? PopularMoviesGrid(
+                  movieData: snapshot.data!,
                 )
               : Center(
                   child: CircularProgressIndicator(),
                 );
         },
       ),
-    );
-  }
-
-  Widget buildGrid(Movie movieData) {
-    return GridView.builder(
-      itemCount: movieData.results.length,
-      gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: Constants.crossAxisCountNumber,
-      ),
-      itemBuilder: (
-        BuildContext context,
-        int index,
-      ) {
-        return InkWell(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (
-                  context,
-                ) =>
-                    HomeDetailPage(
-                  movieReleaseDate:
-                      movieData.results[index].releaseDate!.isNotEmpty
-                          ? movieData.results[index].releaseDate!
-                          : MovieStrings.movieDefaultDate,
-                  movieOverview: movieData.results[index].overview,
-                  moviePosterPath: movieData.results[index].posterPath,
-                  movieTitle: movieData.results[index].title,
-                  movieVoteAverage: movieData.results[index].voteAverage,
-                ),
-              ),
-            );
-          },
-          child: MovieDetailImage(
-            posterPath: movieData.results[index].posterPath,
-          ),
-        );
-      },
     );
   }
 }
