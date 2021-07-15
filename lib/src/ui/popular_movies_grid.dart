@@ -31,7 +31,7 @@ class PopularMoviesGrid extends StatelessWidget {
                 builder: (
                   context,
                 ) =>
-                    MovieDetail(
+                    MovieDetailPage(
                   movieReleaseDate:
                       movieData.results[index].releaseDate!.isNotEmpty
                           ? movieData.results[index].releaseDate!

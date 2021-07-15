@@ -4,8 +4,11 @@ import '../resources/movie_repository.dart';
 import 'i_movie_bloc.dart';
 
 class MovieBloc extends IMovieBloc {
-  MovieRepository _moviesRepository = MovieRepository();
+  MovieRepository _moviesRepository;
   StreamController<Movie> _moviesStreamController = StreamController();
+
+  MovieBloc({MovieRepository? repository})
+      : _moviesRepository = repository ?? MovieRepository();
 
   @override
   Future<void> initialize() async {}
