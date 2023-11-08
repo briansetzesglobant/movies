@@ -28,6 +28,8 @@ dependencies:
     git:
       url: https://github.com/briansetzesglobant/widgets
       ref: main
+  flutter_secure_storage: ^8.1.0
+  sqflite: ^2.2.8+4
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -52,7 +54,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
+  assets:
+    - images/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

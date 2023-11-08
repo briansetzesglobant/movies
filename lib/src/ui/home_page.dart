@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:movies/src/ui/data_base_page.dart';
 import '../../utils/constants.dart';
 import '../../utils/text_styles.dart';
 import '../blocs/i_movie_bloc.dart';
+import '../data_source_local/movie_secure_storage.dart';
+import '../data_source_local/movie_sqlite.dart';
 import '../models/movie.dart';
 import 'popular_movies_grid.dart';
 
@@ -22,6 +25,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final MovieSecureStorage movieSecureStorage = MovieSecureStorage.instance;
+  final MovieSQLite movieSQLite = MovieSQLite.instance;
+
   @override
   void initState() {
     super.initState();
@@ -45,6 +51,68 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Padding(
+                padding: EdgeInsets.only(
+                  top: 30.0,
+                  bottom: 10.0,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.blue),
+                      ),
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (
+                                context,
+                              ) =>
+                                  DataBasePage(dataBase: movieSecureStorage),
+                            ),
+                          );
+                        },
+                        child: const Text(
+                          'Secure Storage',
+                          style: TextStyle(
+                            fontSize: 20.0,
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 80.0,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.blue),
+                      ),
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (
+                                context,
+                              ) =>
+                                  DataBasePage(dataBase: movieSQLite),
+                            ),
+                          );
+                        },
+                        child: const Text(
+                          'SQLite',
+                          style: TextStyle(
+                            fontSize: 20.0,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               Padding(
                 padding: EdgeInsets.all(
                   Constants.childrenPadding,
